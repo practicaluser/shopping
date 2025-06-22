@@ -1,21 +1,34 @@
-import React, { useState } from 'react';
-import { Package2 } from 'lucide-react';
-import { useAuth } from './AuthContext';
+import React, { useState } from 'react'
+import { Package2 } from 'lucide-react'
+import axios from '../api/axios' // axios 인스턴스 경로에 맞게 조정 필요
 
 const LoginPage = () => {
-  const { login } = useAuth();
-  const [credentials, setCredentials] = useState({ id: '', password: '' });
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [credentials, setCredentials] = useState({ id: '', password: '' })
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    const result = await login(credentials);
-    if (!result.success) setError(result.message);
-    setLoading(false);
-  };
+    e.preventDefault()
+    setLoading(true)
+    setError('')
+
+    try {
+      const response = await axios.post('/api/auth/login', {
+        id: credentials.id,
+        password: credentials.password,
+      })
+
+      console.log('로그인 성공:', response.data)
+      // 로그인 성공 후 로직: 토큰 저장, 페이지 이동 등
+      // 예: localStorage.setItem("token", response.data.token);
+    } catch (err) {
+      console.error('로그인 실패:', err)
+      const message = err.response?.data?.message || '로그인에 실패했습니다.'
+      setError(message)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 flex items-center justify-center p-4">
@@ -29,29 +42,39 @@ const LoginPage = () => {
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">관리자 ID</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              관리자 ID
+            </label>
             <input
               type="text"
               value={credentials.id}
-              onChange={(e) => setCredentials({ ...credentials, id: e.target.value })}
+              onChange={(e) =>
+                setCredentials({ ...credentials, id: e.target.value })
+              }
               className="w-full px-4 py-3 border border-gray-300 rounded-lg"
               placeholder="admin"
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">비밀번호</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              비밀번호
+            </label>
             <input
               type="password"
               value={credentials.password}
-              onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+              onChange={(e) =>
+                setCredentials({ ...credentials, password: e.target.value })
+              }
               className="w-full px-4 py-3 border border-gray-300 rounded-lg"
               placeholder="admin123"
               required
             />
           </div>
           {error && (
-            <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>
+            <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">
+              {error}
+            </div>
           )}
           <button
             type="submit"
@@ -63,10 +86,10 @@ const LoginPage = () => {
         </form>
         <div className="mt-6 text-center text-sm text-gray-500">
           <p>테스트 계정: admin / 1234</p>
-        </div> 
+        </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LoginPage;
+export default LoginPage
