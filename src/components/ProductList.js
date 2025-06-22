@@ -53,6 +53,7 @@ import {
 } from 'lucide-react'
 import axios from '../api/axios'
 import { useNavigate } from 'react-router-dom'
+import { Bot } from 'lucide-react'
 
 function ProductList() {
   const [products, setProducts] = useState([])
@@ -445,6 +446,13 @@ function ProductList() {
           </div>
         )}
       </div>
+      <button
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-full bg-emerald-500 text-white shadow-lg hover:bg-emerald-600 transition-all font-semibold"
+        onClick={() => navigate('/chatbotIntro')}
+      >
+        <Bot className="w-5 h-5" />
+        챗봇 도우미
+      </button>
     </div>
   )
 }
