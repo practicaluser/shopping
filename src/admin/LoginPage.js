@@ -1,30 +1,38 @@
 import React, { useState } from 'react'
 import { Package2 } from 'lucide-react'
-import axios from '../api/axios' // axios 인스턴스 경로에 맞게 조정 필요
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from './AuthContext' // ✅ AuthContext 연결
 
 const LoginPage = () => {
-  const [credentials, setCredentials] = useState({ id: '', password: '' })
+  const { login } = useAuth() // ✅ login 함수 가져오기
+  const [credentials, setCredentials] = useState({
+    username: '',
+    password: '',
+  })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log('[LoginPage] 로그인 시도:', credentials)
+
     setLoading(true)
     setError('')
 
     try {
-      const response = await axios.post('/api/auth/login', {
-        id: credentials.id,
-        password: credentials.password,
-      })
+      const result = await login(credentials) // ✅ AuthContext의 login() 호출
+      console.log('[LoginPage] 로그인 결과:', result)
 
-      console.log('로그인 성공:', response.data)
-      // 로그인 성공 후 로직: 토큰 저장, 페이지 이동 등
-      // 예: localStorage.setItem("token", response.data.token);
+      if (result.success) {
+        console.log('[LoginPage] 로그인 성공, /admin 이동')
+        navigate('/admin')
+      } else {
+        setError(result.message || '로그인 실패')
+      }
     } catch (err) {
-      console.error('로그인 실패:', err)
-      const message = err.response?.data?.message || '로그인에 실패했습니다.'
-      setError(message)
+      console.error('[LoginPage] 예외 발생:', err)
+      setError('서버 오류로 로그인에 실패했습니다.')
     } finally {
       setLoading(false)
     }
@@ -47,12 +55,11 @@ const LoginPage = () => {
             </label>
             <input
               type="text"
-              value={credentials.id}
+              value={credentials.username}
               onChange={(e) =>
-                setCredentials({ ...credentials, id: e.target.value })
+                setCredentials({ ...credentials, username: e.target.value })
               }
               className="w-full px-4 py-3 border border-gray-300 rounded-lg"
-              placeholder="admin"
               required
             />
           </div>
@@ -67,7 +74,6 @@ const LoginPage = () => {
                 setCredentials({ ...credentials, password: e.target.value })
               }
               className="w-full px-4 py-3 border border-gray-300 rounded-lg"
-              placeholder="admin123"
               required
             />
           </div>
