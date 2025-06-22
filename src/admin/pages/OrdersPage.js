@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Search, Eye, X, AlertTriangle } from 'lucide-react'
 // Check
-import axios from '../api/axios'
+import axios from '../../api/axios'
 
 // Mock 데이터 - 실제 환경에서는 API로 대체
 // const mockOrders = [

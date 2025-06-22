@@ -10,7 +10,7 @@ import {
   Truck,
   Shield,
 } from 'lucide-react'
-import axios from '../api/axios'
+import axios from '../../api/axios'
 import * as AlertDialog from '@radix-ui/react-alert-dialog'
 import { useNavigate } from 'react-router-dom'
 // , useLocation

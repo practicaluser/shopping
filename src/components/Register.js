@@ -12,7 +12,7 @@ import {
   IdCard,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import axios from '../api/axios'
+import axios from '../../api/axios'
 
 function Register() {
   const [formData, setFormData] = useState({

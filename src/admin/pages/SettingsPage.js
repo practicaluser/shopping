@@ -8,7 +8,7 @@ import {
   Eye,
   EyeOff,
 } from 'lucide-react'
-import axios from '../api/axios'
+import axios from '../../api/axios'
 
 const getAuthHeaders = () => ({
   Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
