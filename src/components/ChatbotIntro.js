@@ -12,7 +12,7 @@ import {
   Sparkles,
   Send,
 } from 'lucide-react'
-import axios from '../../api/axios' // 이름은 그대로 axios 유지
+import axios from '../api/axios' // 이름은 그대로 axios 유지
 // import  {useEffect } from 'react'
 
 const ChatbotIntro = () => {

@@ -51,7 +51,7 @@ import {
   Sparkles,
   TrendingUp,
 } from 'lucide-react'
-import axios from '../../api/axios'
+import axios from '../api/axios'
 import { useNavigate } from 'react-router-dom'
 
 function ProductList() {
