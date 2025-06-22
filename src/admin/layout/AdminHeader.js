@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Menu, Sun, Moon, Bell, LogOut } from 'lucide-react'
 import { useAuth } from '../AuthContext'
 
-import axios from 'axios'
+import axios from '../../api/axios'
 
 const AdminHeader = ({ onMenuClick }) => {
   const { user, logout } = useAuth()
