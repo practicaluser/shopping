@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react'
-import axios from 'axios'
+import axios from '../api/axios'
 import { Search, Edit2, Trash2, X, Save, UserCheck, Users } from 'lucide-react'
 
 // (더미 데이터는 제거. 실 데이터는 API에서 받아옴)

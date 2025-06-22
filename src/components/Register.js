@@ -12,6 +12,7 @@ import {
   IdCard,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import axios from '../api/axios'
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -63,11 +64,7 @@ function Register() {
 
     try {
       // (2) 실제 API 호출
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      })
+      const response = await axios.post('/api/auth/register', formData)
 
       if (response.ok) {
         setSuccess(true)

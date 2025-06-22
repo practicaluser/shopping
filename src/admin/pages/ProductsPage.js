@@ -1,7 +1,7 @@
 // src/admin/pages/ProductsPage.js
 import React, { useState, useEffect } from 'react'
 import { Package, X, Search, Image as ImageIcon } from 'lucide-react'
-import axios from 'axios'
+import axios from '../api/axios'
 
 const ProductsPage = () => {
   const [newProduct, setNewProduct] = useState({

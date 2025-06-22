@@ -51,7 +51,7 @@ import {
   Sparkles,
   TrendingUp,
 } from 'lucide-react'
-import axios from 'axios'
+import axios from '../api/axios'
 import { useNavigate } from 'react-router-dom'
 
 function ProductList() {
@@ -168,22 +168,21 @@ function ProductList() {
 
               {isLoggedIn ? (
                 <>
-      <button
-        className="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 transition font-semibold"
-        onClick={() => navigate('/mypage')}
-      >
-        마이페이지
-      </button>
-      <button
-        className="px-4 py-2 rounded-xl bg-purple-500 text-white hover:bg-purple-600 transition font-semibold"
-        onClick={handleLogout}
-      >
-        로그아웃
-      </button>
-    </>
-  ) : (
+                  <button
+                    className="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 transition font-semibold"
+                    onClick={() => navigate('/mypage')}
+                  >
+                    마이페이지
+                  </button>
+                  <button
+                    className="px-4 py-2 rounded-xl bg-purple-500 text-white hover:bg-purple-600 transition font-semibold"
+                    onClick={handleLogout}
+                  >
+                    로그아웃
+                  </button>
+                </>
+              ) : (
                 <>
-                
                   <button
                     className="px-4 py-2 rounded-xl bg-purple-500 text-white hover:bg-purple-600 transition font-semibold"
                     onClick={() => navigate('/login')}

@@ -9,7 +9,7 @@ import {
   // TrendingUp,
   // TrendingDown,
 } from 'lucide-react'
-import axios from 'axios'
+import axios from '../api/axios'
 
 const AdminDashboard = () => {
   // State

@@ -8,7 +8,7 @@ import {
   RotateCcw,
 } from 'lucide-react'
 import { useNavigate, useParams } from 'react-router-dom'
-import axios from 'axios'
+import axios from '../api/axios'
 
 const ProductDetail = () => {
   // 1. URL에서 id 추출
